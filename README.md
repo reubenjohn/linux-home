@@ -27,9 +27,9 @@ This repository contains various configuration files and scripts to set up and m
     git clone https://github.com/yourusername/linux-home.git ~/
     ```
 
-2. Symlink the `.zshrc` file to your home directory:
+2. Run the install script to set up the `.zshrc` file:
     ```sh
-    ln -s ~/linux-home/.zshrc ~/.zshrc
+    sh ~/linux-home/install.sh
     ```
 
 3. Reload your Zsh configuration:
