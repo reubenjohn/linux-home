@@ -108,12 +108,6 @@ source $ZSH/oh-my-zsh.sh
 alias cpcmd="fc -ln -1 | clip.exe"
 alias clear="clear && byobu clear-history"
 
-# setup aliases for each Jetbrain app on Windows
-for dir in /mnt/c/Users/reube/AppData/Local/JetBrains/Toolbox/apps/*/ch-0/*/bin/*64.exe; do
-  appname=$(echo $dir | grep -oEi "/[a-zA-Z]+64.exe" | grep -oEI "[a-zA-Z]{4,}")
-  alias $appname="$dir"
-done
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
