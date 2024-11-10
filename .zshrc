@@ -75,6 +75,7 @@ plugins=(
 	poetry
 	rust
 	podman
+  z
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -112,8 +113,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Source: https://github.com/rupa/z/blob/master/z.sh
-. /opt/z.sh
 
 [[ -n "$WT_SESSION" ]] && {
   chpwd() {
@@ -132,7 +131,5 @@ export PATH="/home/reuben/.local/bin:$PATH" # Poetry
 # autoload -U compinit; compinit
 
 
-val "$(ssh-agent -s)"
+eval "$(ssh-agent -s)"
 ssh-add /home/reuben/.ssh/id_github_ed25519
-
-echo -e '\nexport GPG_TTY=$(tty)' >> ~/.zshrc
