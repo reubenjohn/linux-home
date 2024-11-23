@@ -76,6 +76,7 @@ plugins=(
 	rust
 	podman
   z
+  github
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -124,6 +125,7 @@ export NVM_DIR="$HOME/.nvm"
 
 
 # Environment variables
+source "$HOME/.home/rc/envrc"
 export SPARK_HOME=~/academics/GDM/spark-3.3.0-bin-hadoop2
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 export PATH="/home/reuben/.local/bin:$PATH" # Poetry

@@ -24,17 +24,27 @@ This repository contains various configuration files and scripts to set up and m
 
 1. Clone the repository to your home directory:
     ```sh
-    git clone https://github.com/yourusername/linux-home.git ~/
+    git clone https://github.com/yourusername/linux-home.git ~/.home
     ```
 
 2. Run the install script to set up the `.zshrc` file:
     ```sh
-    sh ~/linux-home/install.sh
+    sh ~/.home/install.sh
     ```
 
 3. Reload your Zsh configuration:
     ```sh
     source ~/.zshrc
+    ```
+
+4. Set up `envrc` for directory-specific environment variables:
+    ```sh
+    ~/.home/setup/envrc-setup.sh
+    ```
+
+5. Configure GitHub CLI and SSH:
+    ```sh
+    ~/.home/setup/github.sh
     ```
 
 ## Contributing
