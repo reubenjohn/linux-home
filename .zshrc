@@ -132,6 +132,3 @@ export PATH="/home/reuben/.local/bin:$PATH" # Poetry
 
 # autoload -U compinit; compinit
 
-
-eval "$(ssh-agent -s)"
-ssh-add /home/reuben/.ssh/id_github_ed25519

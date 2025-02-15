@@ -1,8 +1,11 @@
 #!/bin/bash
 
 source "$HOME/.home/setup/utils.sh"
+source "$HOME/.home/rc/envrc"
 
-echo "🚀 Starting GitHub SSH setup..."
+SSH_AGENT_RC="$HOME/.home/.env/ssh0-agent.rc"
+GITHUB_SSH_RC="$HOME/.home/.env/ssh1-github.rc"
+
 
 update_and_install_gh() {
     echo "🔄 Updating system and installing GitHub CLI..."
@@ -68,14 +71,12 @@ start_agent_with_key() {
 automate_ssh_agent_startup() {
     local key_path="$1"
     echo "🔄 Automating SSH agent startup..."
-    SHELL_PROFILE="$HOME/.bashrc"
-    if ! grep -q "ssh-add $key_path" "$SHELL_PROFILE"; then
-        echo "🔄 Adding SSH agent commands to $SHELL_PROFILE..."
-        echo -e "\neval \"\$(ssh-agent -s)\" \nssh-add $key_path" >> "$SHELL_PROFILE"
-        source "$SHELL_PROFILE"
-    else
-        echo "🔄 SSH agent commands already exist in $SHELL_PROFILE. Skipping."
-    fi
+    _warn_overwrite "$SSH_AGENT_RC" || return 1
+    echo -e "\neval \"\$(ssh-agent -s)\" \n" > "$SSH_AGENT_RC"
+    _warn_overwrite "$GITHUB_SSH_RC" || return 1
+    echo -e "ssh-add $key_path" > "$GITHUB_SSH_RC"
+    envrc-generate
+    envrc-source
 }
 
 test_ssh_connection() {
@@ -83,7 +84,9 @@ test_ssh_connection() {
     ssh -T git@github.com
 }
 
-main() {
+setup_github() {
+    echo "🚀 Starting GitHub setup..."
+
     local KEY_PATH="$HOME/.ssh/id_ed25519_github"
     _optional_command "Install gh & jq" update_and_install_gh
     _optional_command "Authenticate with gh" authenticate_with_gh
@@ -95,5 +98,3 @@ main() {
     _optional_command "Test SSH connection" test_ssh_connection
     echo "🎉 GitHub SSH setup completed successfully!"
 }
-
-main
